@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser'); //loads cookie parser library
 //Spotify Configurations [secret]
 var config = require('./config');
 var routes = require("./controllers/routes");
+var playlists = require("./controllers/playlists");
 var session = require('express-session');
 
 
@@ -19,9 +20,11 @@ app.use(logger('dev')); //Using the morgan logger for HTTP requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: 'yay area', cookie: { maxAge: 60000}}))
+app.use(session({ secret: 'yay area', cookie: { maxAge: 60000}}));
 
-app.use('/', routes)
+app.use('/', routes);
+app.use('/playlists/', routes)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

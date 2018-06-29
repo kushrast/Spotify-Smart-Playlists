@@ -99,10 +99,6 @@ router.get("/authenticated", function(req, res, next) {
   res.render("authenticated");
 });
 
-router.get("/playlist", function(req, res, next) {
-  res.render("playlist");
-});
-
 router.get("/invalid", function(req, res, next) {
   res.render("invalid");
 });
