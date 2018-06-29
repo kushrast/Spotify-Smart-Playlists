@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
     // use the access token to access the Spotify Web API
     request.get(options, function(error, response, playlist) {
       data = {
-        'tracks': playlist,
+        'playlist': playlist,
         'access_token': req.session.access_token
       }
       res.render('playlist', data);

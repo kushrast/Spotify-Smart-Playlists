@@ -2,7 +2,7 @@
 	<div class="playlist-body" id="playlist-bod">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title">{{Name}}</h5>
+				<h5 class="card-title">{{playlist.Name}}</h5>
 				<button type="button" class="btn btn-outline-primary" id="play-curr" disabled>Play</button>
 				<div class="row">
 					<div class="play-handle col-md-1">
@@ -10,7 +10,7 @@
 					</div>
 					<div class="col-md-11">
 						<ol class="list-group song-list" id="song-list">
-							{{#tracks.items}}
+							{{#playlist.tracks.items}}
 							  <li class="dl-horizontal list-group-item" id="{{track.uri}}">
 							  	<div class="row">
 								  	<div class="col-md-1">
@@ -24,7 +24,7 @@
 								    </div>
 							    </div>
 							  </li>
-							{{/tracks.items}}
+							{{/playlist.tracks.items}}
 						</ol>
 					</div>
 				</div>
