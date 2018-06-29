@@ -47,7 +47,7 @@ router.get('/login', function(req, res, next) {
     }));
 });
 
-router.get('/callback', function(req, res, next) {
+router.get('/authorization', function(req, res, next) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter

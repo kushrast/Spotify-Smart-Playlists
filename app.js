@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser'); //loads cookie parser library
 //Spotify Configurations [secret]
 var config = require('./config');
-var credentials = require("./controllers/credentials")
+var credentials = require("./controllers/routes")
 
 var app = express();
 app.set("views", path.join(__dirname, "views")) //Lets system know that views are in the /views folder
