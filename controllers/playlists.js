@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
         'tracks': playlist,
         'access_token': req.session.access_token
       }
-      res.render('playlists', data);
+      res.render('playlist', data);
     });
   }
 });

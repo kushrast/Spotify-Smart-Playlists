@@ -97,7 +97,7 @@ router.get('/authorization', function(req, res, next) {
 
 router.get("/authenticated", function(req, res, next) {
   res.render("authenticated");
-});
+}); 
 
 router.get("/invalid", function(req, res, next) {
   res.render("invalid");
