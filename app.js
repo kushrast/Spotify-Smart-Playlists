@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'yay area', cookie: { maxAge: 60000}}));
 
 app.use('/', routes);
-app.use('/playlists/', routes)
+app.use('/playlists/', playlists);
 
 
 // catch 404 and forward to error handler
