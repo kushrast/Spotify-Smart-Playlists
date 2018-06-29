@@ -1,5 +1,5 @@
 var express = require("express"); //Routing
-var requests = require("request"); //Used to request data from Spotify's Web API
+var request = require("request"); //Used to request data from Spotify's Web API
 var querystring = require('querystring')
 
 var config = require('./../config');
