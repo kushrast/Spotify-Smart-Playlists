@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser'); //loads cookie parser library
 //Spotify Configurations [secret]
 var config = require('./config');
-var credentials = require("./controllers/routes")
+var routes = require("./controllers/routes")
 
 var app = express();
 app.set("views", path.join(__dirname, "views")) //Lets system know that views are in the /views folder
@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 var router = express.Router(); //The router matches HTTP requests to frontend views
 
-app.use('/', router)
+app.use('/', routes)
 
 // router.get('/', function(req, res, next) {
 // 	if (req.session.access_token) {
@@ -45,7 +45,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('invalid');
 });
 
 console.log('Listening on PORT');
