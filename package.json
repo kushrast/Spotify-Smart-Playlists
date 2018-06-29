@@ -1,0 +1,25 @@
+{
+  "name": "spotify-smart-playlists",
+  "version": "1.0.0",
+  "description": "Using Spotify’s Web API to provide Spotify users with advanced functionalities like the ability to make and play from sub-playlists as well as the ability to sample music from a playlist based off of different metrics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kushrast/Spotify-Smart-Playlists.git"
+  },
+  "keywords": [
+    "Spotify",
+    "Node",
+    "Express",
+    "Handlebars"
+  ],
+  "author": "Kush Rastogi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kushrast/Spotify-Smart-Playlists/issues"
+  },
+  "homepage": "https://github.com/kushrast/Spotify-Smart-Playlists#readme"
+}
