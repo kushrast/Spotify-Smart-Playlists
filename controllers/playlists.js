@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
   else {
     var options = {
-      url: 'https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX3PIPIT6lEg5/tracks',
+      url: 'https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX3PIPIT6lEg5/',
       headers: { 'Authorization': 'Bearer ' + req.session.access_token },
       json: true
     };
