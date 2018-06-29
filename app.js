@@ -8,7 +8,9 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser'); //loads cookie parser library
 //Spotify Configurations [secret]
 var config = require('./config');
-var routes = require("./controllers/routes")
+var routes = require("./controllers/routes");
+var session = require('express-session');
+
 
 var app = express();
 app.set("views", path.join(__dirname, "views")) //Lets system know that views are in the /views folder
@@ -17,6 +19,7 @@ app.use(logger('dev')); //Using the morgan logger for HTTP requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ secret: 'yay area', cookie: { maxAge: 60000}}))
 
 app.use('/', routes)
 
