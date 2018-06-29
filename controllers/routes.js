@@ -76,7 +76,10 @@ router.get('/authorization', function(req, res, next) {
       json: true
     };
 
+    console.log(authOptions);
+
     request.post(authOptions, function(error, response, body) {
+      console.log(response);
       if (!error && response.statusCode === 200) {
 
         var access_token = body.access_token,
