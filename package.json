@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/kushrast/Spotify-Smart-Playlists/issues"
   },
-  "homepage": "https://github.com/kushrast/Spotify-Smart-Playlists#readme"
+  "homepage": "https://github.com/kushrast/Spotify-Smart-Playlists#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7",
+    "request": "^2.87.0"
+  }
 }
