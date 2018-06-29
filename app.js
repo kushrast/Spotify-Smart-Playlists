@@ -18,17 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-var router = express.Router(); //The router matches HTTP requests to frontend views
-
 app.use('/', routes)
-
-// router.get('/', function(req, res, next) {
-// 	if (req.session.access_token) {
-// 		res.redirect('/main');
-// 	} else {
-// 		res.redirect('/login'); //incorporate session data soon
-// 	}
-// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -103,3 +103,5 @@ router.get("/playlist", function(req, res, next) {
 router.get("/invalid", function(req, res, next) {
   res.render("invalid");
 });
+
+module.exports = router;
