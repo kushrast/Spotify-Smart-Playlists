@@ -1,9 +1,9 @@
-var path = use("path"); //Works with file paths
+var path = require("path"); //Works with file paths
 //Routing
-var express = use("express"); //Routing
-var logger = use("morgan"); //HTTP Logger
+var express = require("express"); //Routing
+var logger = require("morgan"); //HTTP Logger
 //Data
-var requests = use("request"); //Used to request data from Spotify's Web API
+var requests = require("request"); //Used to request data from Spotify's Web API
 
 var app = express();
 app.set("views", path.join(__dirname, "views")) //Lets system know that views are in the /views folder
