@@ -43,7 +43,7 @@ var sortable = Sortable.create(playlist_songs, {
 		})
 
 		$.ajax({
-			url: "/playlist/{{playlist.uri}}/update",
+			url: "/playlists/{{playlist.uri}}/update",
 			type: "post",
 			data: JSON.stringify({
 				"uris": uris
