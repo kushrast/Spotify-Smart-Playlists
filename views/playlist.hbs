@@ -39,7 +39,7 @@ var sortable = Sortable.create(playlist_songs, {
 	onSort: function(evt) {
 		uris = [];
 		$("#song-list").find("li").each(function(){
-			uris.append($(this).attr('id'));
+			uris.push($(this).attr('id'));
 		})
 
 		$.ajax({
