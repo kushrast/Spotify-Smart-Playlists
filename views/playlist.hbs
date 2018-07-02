@@ -1,9 +1,9 @@
 <div class="container">
-	{{#each model as |playlist|}}
+	{{#playlists}}
 		<div class="playlist-body" id="playlist-bod">
 			<div class="card">
 				<div class="card-body">
-					<h5 class="card-title">{{playlist.name}}</h5>
+					<h5 class="card-title">{{name}}</h5>
 					<button type="button" class="btn btn-outline-primary" id="play-curr" disabled>Play</button>
 					<div class="row">
 						<div class="play-handle col-md-1">
@@ -11,7 +11,7 @@
 						</div>
 						<div class="col-md-11">
 							<ol class="list-group song-list" id="song-list">
-								{{#playlist.tracks.items}}
+								{{#tracks.items}}
 								  <li class="dl-horizontal list-group-item" id="{{track.uri}}">
 								  	<div class="row">
 									  	<div class="col-md-1">
@@ -25,14 +25,14 @@
 									    </div>
 								    </div>
 								  </li>
-								{{/playlist.tracks.items}}
+								{{/tracks.items}}
 							</ol>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	{{/each}}
+	{{/playlists}}
 </div>
 
 <!-- <script>

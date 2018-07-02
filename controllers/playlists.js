@@ -41,7 +41,10 @@ router.get('/', function(req, res, next) {
       }
     },
     function(err, results){
-      res.render("playlist", [results.playlist1, results.playlist2]);
+      data = {
+        "playlists": [results.playlist1, results.playlist2]
+      }
+      res.render("playlist", data);
     })
   }
 });
