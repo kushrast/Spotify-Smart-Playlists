@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
       }
     },
     function(err, results){
-      res.send([playlist1.playlist, playlist2.playlist]);
+      res.send([results.playlist1, results.playlist2]);
     })
   }
 });
