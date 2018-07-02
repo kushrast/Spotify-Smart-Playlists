@@ -52,7 +52,7 @@ router.get('/', function(req, res, next) {
 router.post("/:uri/update", function(req, res, next) {
   console.log(req.session);
 
-  else {
+  if (req.session.access_token) {
     var body = JSON.parse(Object.keys(req.body)[0]);
     var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
     var options = {
@@ -74,22 +74,26 @@ router.post("/:uri/update", function(req, res, next) {
 });
 
 router.post("/play", function(req, res, next) {
-  console.log("play");
   console.log(req.session);
-  var body = JSON.parse(Object.keys(req.body)[0]);
-  var options = {
-      url: 'https://api.spotify.com/v1/me/player/play',
-      headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-      body: {
-        'uris': body.uris
-      },
-      json: true
-    };
+  if (req.session.access_token) {
+    var body = JSON.parse(Object.keys(req.body)[0]);
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/play',
+        headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+        body: {
+          'uris': body.uris
+        },
+        json: true
+      };
 
-    // use the access token to access the Spotify Web API
-    request.put(options, function(error, response, playlist) {
-      console.log(error)
-  });
+      console.log(options);
+      console.log(req.body);
+
+      // use the access token to access the Spotify Web API
+      request.put(options, function(error, response, playlist) {
+        console.log(error)
+    });
+  }
 });
 
 module.exports = router;
