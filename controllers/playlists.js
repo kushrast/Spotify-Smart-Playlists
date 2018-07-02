@@ -1,6 +1,7 @@
 var express = require("express"); //Routing
 var request = require("request"); //Used to request data from Spotify's Web API
-var querystring = require('querystring')
+var querystring = require('querystring');
+var async = require('async'); //For faster data recovery from Spotify
 
 var config = require('./../config');
 
@@ -15,33 +16,43 @@ router.get('/', function(req, res, next) {
   } 
 
   else {
-    var options = {
-      url: 'https://api.spotify.com/v1/users/124566647/playlists/5nXKbLNDid4yzRChPtJN3W',
-      headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-      json: true
-    };
+    async.parallel({
+      playlist1: function(callback) {
+        var options = {
+          url: 'https://api.spotify.com/v1/users/124566647/playlists/5nXKbLNDid4yzRChPtJN3W',
+          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+          json: true
+        };
 
-    console.log(options);
+        request.get(options, function(error, response, playlist) {
+          callback(null, playlist);
+        });
+      },
+      playlist2: function(callback) {
+        var options = {
+          url: 'https://api.spotify.com/v1/users/124566647/playlists/45OFl36RatFmWQbLKvJE4B',
+          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+          json: true
+        };
 
-    // use the access token to access the Spotify Web API
-    request.get(options, function(error, response, playlist) {
-      data = {
-        'playlist': playlist,
-        'access_token': req.session.access_token
+        request.get(options, function(error, response, playlist) {
+          callback(null, playlist);
+        });
       }
-      res.render('playlist', data);
-    });
+    },
+    function(err, results){
+      data = {
+        "playlists": [results.playlist1, results.playlist2]
+      }
+      res.render("playlist", data);
+    })
   }
 });
 
 router.post("/:uri/update", function(req, res, next) {
   console.log(req.session);
 
-  if (!req.session.access_token) {
-    res.redirect("/invalid");
-  } 
-
-  else {
+  if (req.session.access_token) {
     var body = JSON.parse(Object.keys(req.body)[0]);
     var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
     var options = {
@@ -60,6 +71,29 @@ router.post("/:uri/update", function(req, res, next) {
       console.log(error);
     });
   }
-})
+});
+
+router.post("/play", function(req, res, next) {
+  console.log(req.session);
+  if (req.session.access_token) {
+    var body = JSON.parse(Object.keys(req.body)[0]);
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/play',
+        headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+        body: {
+          'uris': body.uris
+        },
+        json: true
+      };
+
+      console.log(options);
+      console.log(req.body);
+
+      // use the access token to access the Spotify Web API
+      request.put(options, function(error, response, playlist) {
+        console.log(error)
+    });
+  }
+});
 
 module.exports = router;
