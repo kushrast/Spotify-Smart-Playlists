@@ -81,7 +81,7 @@ router.post("/play", function(req, res, next) {
   var body = JSON.parse(Object.keys(req.body)[0]);
   var options = {
       url: 'https://api.spotify.com/v1/me/player/play',
-      headers: { 'Authorization': 'Bearer ' + body.access },
+      headers: { 'Authorization': 'Bearer ' + req.session.access_token },
       body: {
         'uris': body.uris
       },
