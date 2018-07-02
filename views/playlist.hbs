@@ -35,5 +35,20 @@
 
 <script>
 var playlist_songs = document.getElementById('song-list');
-var sortable = Sortable.create(playlist_songs);
+var sortable = Sortable.create(playlist_songs, {
+	onSort: function(evt) {
+		uris = [];
+		$("#song-list").find("li").each(function(){
+			uris.append($(this).attr('id'));
+		})
+
+		$.ajax({
+			url: "/playlist/" + playlist.uri + "/update",
+			type: "post",
+			data: JSON.stringify({
+				"uris": uris
+			})
+		})
+	}
+});
 </script>
