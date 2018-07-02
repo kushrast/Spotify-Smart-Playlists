@@ -87,7 +87,7 @@ router.get('/authorization', function(req, res, next) {
 
         req.session.access_token = access_token;
         req.session.refresh_token = refresh_token;
-        res.redirect('/authenticated');
+        res.redirect('/playlists');
       } else {
         res.redirect('/invalid');
       }

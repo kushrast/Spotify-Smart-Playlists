@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.post("/:id/update", function(req, res, next) {
+router.post("/:uri/update", function(req, res, next) {
   console.log(req.session);
 
   if (!req.session.access_token) {
@@ -43,8 +43,9 @@ router.post("/:id/update", function(req, res, next) {
 
   else {
     var body = JSON.parse(Object.keys(req.body)[0]);
+    var uri = req.params.uri.split(":");
     var options = {
-      url: 'https://api.spotify.com/v1/users/124566647/playlists/' + req.params.id + '/tracks',
+      url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
       headers: { 'Authorization': 'Bearer ' + req.session.access_token },
       body: {
         'uris': body.uris
