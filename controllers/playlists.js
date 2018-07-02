@@ -77,4 +77,24 @@ router.post("/:uri/update", function(req, res, next) {
   }
 });
 
+router.post("/play", function(req, res, next) {
+  var body = JSON.parse(Object.keys(req.body)[0]);
+  var options = {
+      url: 'https://api.spotify.com/v1/me/player/play',
+      headers: { 'Authorization': 'Bearer ' + body.access },
+      body: {
+        'uris': body.uris
+      },
+      json: true
+    };
+
+    console.log(options);
+    console.log(req.body);
+
+    // use the access token to access the Spotify Web API
+    request.put(options, function(error, response, playlist) {
+      console.log(error)
+  });
+});
+
 module.exports = router;
