@@ -57,10 +57,7 @@ router.post("/:uri/update", function(req, res, next) {
 
     // use the access token to access the Spotify Web API
     request.put(options, function(error, response, playlist) {
-      data = {
-        'playlist': playlist,
-      }
-      res.render('playlist', data);
+      console.log(error);
     });
   }
 })
