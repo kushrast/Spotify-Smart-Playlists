@@ -10,7 +10,7 @@
 							<i class="fas fa-arrows-alt"></i>
 						</div>
 						<div class="col-md-11">
-							<ol class="list-group song-list" id="song-list">
+							<ol class="list-group song-list" id="{{uri}}">
 								{{#tracks.items}}
 								  <li class="dl-horizontal list-group-item" id="{{track.uri}}">
 								  	<div class="row">
@@ -35,22 +35,26 @@
 	{{/playlists}}
 </div>
 
-<!-- <script>
-var playlist_songs = document.getElementById('song-list');
-var sortable = Sortable.create(playlist_songs, {
-	onSort: function(evt) {
-		uris = [];
-		$("#song-list").find("li").each(function(){
-			uris.push($(this).attr('id'));
-		})
+<script>
+$(".song-list").each(function() {
+	Sortable.create(this,
+	{
+		group: "songs",
+		onSort: function(evt) {
+			uris = [];
+			$(this).find("li").each(function(){
+				uris.push(this.id);
+			});
 
-		$.ajax({
-			url: "/playlists/{{playlist.uri}}/update",
-			type: "post",
-			data: JSON.stringify({
-				"uris": uris
-			})
-		})
-	}
+			$.ajax({
+				url: "/playlists/"+this.id+"/update",
+				type: "post",
+				data: JSON.stringify({
+					"uris": uris
+				})
+			});
+		}
+	})
 });
-</script> -->
+
+</script>
