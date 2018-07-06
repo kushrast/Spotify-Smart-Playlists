@@ -10,7 +10,7 @@ var router = express.Router(); //The router matches HTTP requests to frontend vi
 
 router.get('/', function(req, res, next) {
 
-  console.log(req.session);
+  console.log(req.session.userid);
 
   if (!req.session.access_token) {
     res.redirect("/invalid");
