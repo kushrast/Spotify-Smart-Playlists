@@ -49,16 +49,14 @@ app.use(function(err, req, res, next) {
   res.render('invalid');
 });
 
-console.log('Listening on PORT');
-app.listen(process.env.PORT);
 
-
-// //MONGO DB & MONGOOSE
-// db.connect(config.MONGODB_URI, function(err){
-// 	if(err) {
-// 		console.log("Unable to log into Mongo DB");
-// 		process.exit(1);
-// 	} else {
-
-// 	}
-// })
+//MONGO DB & MONGOOSE
+db.connect(config.mongo_db, function(err){
+	if(err) {
+		console.log("Unable to log into Mongo DB");
+		process.exit(1);
+	} else {
+		console.log('Listening on PORT');
+		app.listen(process.env.PORT);
+	}
+})
