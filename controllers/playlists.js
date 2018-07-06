@@ -4,6 +4,7 @@ var querystring = require('querystring');
 var async = require('async'); //For faster data recovery from Spotify
 
 var config = require('./../config');
+var db = require('./../db');
 
 var router = express.Router(); //The router matches HTTP requests to frontend views
 
@@ -16,6 +17,7 @@ router.get('/', function(req, res, next) {
   } 
 
   else {
+    console.log(db.get().collection('test').findOne());
     async.parallel({
       playlist1: function(callback) {
         var options = {
