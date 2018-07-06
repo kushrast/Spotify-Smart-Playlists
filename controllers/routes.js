@@ -82,12 +82,21 @@ router.get('/authorization', function(req, res, next) {
       console.log(response);
       if (!error && response.statusCode === 200) {
 
+        var userOptions = {
+          url: "https://api.spotify.com/v1/me",
+          json: true
+        }
+
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
         req.session.access_token = access_token;
         req.session.refresh_token = refresh_token;
         res.redirect('/playlists');
+
+        request.post(userOptions, function(error, response, body)) {
+          console.log(body);
+        }
       } else {
         res.redirect('/invalid');
       }
