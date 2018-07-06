@@ -32,8 +32,7 @@ router.get('/', function(req, res, next) {
       playlist2: function(callback) {
         var options = {
           url: 'https://api.spotify.com/v1/users/124566647/playlists/45OFl36RatFmWQbLKvJE4B',
-          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-          json: true
+          headers: { 'Authorization': 'Bearer ' + req.session.access_token }
         };
 
         request.get(options, function(error, response, playlist) {

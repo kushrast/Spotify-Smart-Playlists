@@ -82,15 +82,13 @@ router.get('/authorization', function(req, res, next) {
       console.log(response);
       if (!error && response.statusCode === 200) {
 
-        var userOptions = {
-          url: "https://api.spotify.com/v1/me",
-          headers: {
-            'Authorization': 'Basic ' + body.access_token
-          },
+        var options = {
+          url: 'https://api.spotify.com/v1/me',
+          headers: { 'Authorization': 'Bearer ' + body.access_token },
           json: true
-        }
+        };
 
-        request.get(userOptions, function(error, response, body) {
+        request.get(options, function(error, response, body) {
           console.log(response);
           if (!error && response.statusCode === 200) {
             req.session.userid = body.id;
