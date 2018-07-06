@@ -9,7 +9,7 @@ exports.connect = function(url, done) {
 
   MongoClient.connect(url, function(err, db) {
     if (err) return done(err)
-    state.db = db.db;
+    state.db = db.db("heroku_lr7k2nt1");
     done()
   })
 }
