@@ -84,19 +84,26 @@ router.get('/authorization', function(req, res, next) {
 
         var userOptions = {
           url: "https://api.spotify.com/v1/me",
+          headers: {
+            'Authorization': 'Basic ' + body.access_token
+          },
           json: true
         }
+
+        request.get(userOptions, function(error, response, body) {
+          if (!error && response.statusCode === 200) {
+            req.session.userid = body.id;
+          }
+        });
 
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
         req.session.access_token = access_token;
         req.session.refresh_token = refresh_token;
-        res.redirect('/playlists');
 
-        request.post(userOptions, function(error, response, body)) {
-          console.log(body);
-        }
+        console.log(req.session);
+        res.redirect('/playlists');
       } else {
         res.redirect('/invalid');
       }
