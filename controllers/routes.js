@@ -82,12 +82,25 @@ router.get('/authorization', function(req, res, next) {
       console.log(response);
       if (!error && response.statusCode === 200) {
 
-        var access_token = body.access_token,
+        var userOptions = {
+          url: "https://api.spotify.com/v1/me",
+          headers: { 'Authorization': 'Bearer ' + body.access_token }
+        }
+
+        request.post(userOptions, function(error, response, userBody) {
+          if (!error && response.statusCode === 200) {
+            var userID = userBody.id;
+            var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
-        req.session.access_token = access_token;
-        req.session.refresh_token = refresh_token;
-        res.redirect('/playlists');
+            req.session.access_token = access_token;
+            req.session.refresh_token = refresh_token;
+            req.session.userID = userID;
+
+            consol.log(req.session);
+            res.redirect('/playlists');
+          }
+        })
       } else {
         res.redirect('/invalid');
       }
