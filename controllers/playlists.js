@@ -42,7 +42,10 @@ router.get('/', function(req, res, next) {
       }
     },
     function(err, results){
-      console.log(db.get().collection("test"));
+        db.get().collection("test").find().toArray(function(err, docs) {
+          assert.equal(err, null);
+          console.log(docs);
+        });
       data = {
         "playlists": [results.playlist1, results.playlist2]
       }
