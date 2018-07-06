@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
   } 
 
   else {
-    console.log(db.get().collection('test').find());
     async.parallel({
       playlist1: function(callback) {
         var options = {
@@ -43,6 +42,7 @@ router.get('/', function(req, res, next) {
       }
     },
     function(err, results){
+      console.log(db.get().collection('test').find());
       data = {
         "playlists": [results.playlist1, results.playlist2]
       }
