@@ -90,15 +90,17 @@ router.get('/authorization', function(req, res, next) {
 
         request.get(options, function(error, response, body) {
           console.log(response);
+          req.session.userid = body.id;
           if (!error && response.statusCode === 200) {
-            var access_token = body.access_token,
-            refresh_token = body.refresh_token;
-
-            req.session.access_token = access_token;
-            req.session.refresh_token = refresh_token;
             req.session.userid = body.id;
           }
         });
+
+        var access_token = body.access_token,
+            refresh_token = body.refresh_token;
+
+        req.session.access_token = access_token;
+        req.session.refresh_token = refresh_token;
 
         console.log(req.session);
         res.redirect('/playlists');
