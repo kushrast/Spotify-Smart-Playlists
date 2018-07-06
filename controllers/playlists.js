@@ -43,7 +43,6 @@ router.get('/', function(req, res, next) {
     },
     function(err, results){
         db.get().collection("test").find().toArray(function(err, docs) {
-          assert.equal(err, null);
           console.log(docs);
         });
       data = {
