@@ -84,10 +84,12 @@ router.get('/authorization', function(req, res, next) {
 
         var userOptions = {
           url: "https://api.spotify.com/v1/me",
-          headers: { 'Authorization': 'Bearer ' + body.access_token }
+          headers: { 'Authorization': 'Bearer ' + body.access_token },
+          json: true
         }
 
         request.post(userOptions, function(error, response, userBody) {
+          console.log(error);
           if (!error && response.statusCode === 200) {
             var userID = userBody.id;
             var access_token = body.access_token,
@@ -97,7 +99,7 @@ router.get('/authorization', function(req, res, next) {
             req.session.refresh_token = refresh_token;
             req.session.userID = userID;
 
-            consol.log(req.session);
+            console.log(req.session);
             res.redirect('/playlists');
           }
         })
