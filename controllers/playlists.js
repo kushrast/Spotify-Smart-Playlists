@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   } 
 
   else {
-    console.log(db.get().collection('test').findOne());
+    console.log(db.get().collection('test').find());
     async.parallel({
       playlist1: function(callback) {
         var options = {
