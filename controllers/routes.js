@@ -88,8 +88,8 @@ router.get('/authorization', function(req, res, next) {
           json: true
         };
 
-        request.get(options, function(error, response, body) {
-          var id = body.id
+        request.get(options, function(error, response, user_body) {
+          var id = user_body.id
           // if (!error && response.statusCode == 200) {
           //   req.session.userid = body.id;
                   var access_token = body.access_token,
