@@ -17,38 +17,29 @@ router.get('/', function(req, res, next) {
   } 
 
   else {
-    async.parallel({
-      playlist1: function(callback) {
+    var playlists = [];
+    db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
+      async.each(docs["data"], function(item, callback) {
         var options = {
-          url: 'https://api.spotify.com/v1/users/124566647/playlists/5nXKbLNDid4yzRChPtJN3W',
-          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-          json: true
-        };
-
-        request.get(options, function(error, response, playlist) {
-          callback(null, playlist);
-        });
-      },
-      playlist2: function(callback) {
-        var options = {
-          url: 'https://api.spotify.com/v1/users/124566647/playlists/45OFl36RatFmWQbLKvJE4B',
+          url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
           headers: { 'Authorization': 'Bearer ' + req.session.access_token }
         };
 
+        console.log(options);
+
         request.get(options, function(error, response, playlist) {
-          callback(null, playlist);
+          playlists.push.apply(playlists, playlist);
         });
-      }
-    },
-    function(err, results){
-        db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
-          console.log(docs);
-        });
-      data = {
-        "playlists": [results.playlist1, results.playlist2]
-      }
-      res.render("playlist", data);
-    })
+        callback();
+      }, function(err) {
+        if (err) return console.log('ERROR', err);
+
+        data = {
+          "playlists": playlists
+        }
+        res.render("playlist", data);
+      });
+    });
   }
 });
 
