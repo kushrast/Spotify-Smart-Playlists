@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
         console.log(options);
 
         request.get(options, function(error, response, playlist) {
-          playlists.push.apply(playlists, playlist);
+          playlists.push(playlist);
         });
         callback();
       }, function(err) {
