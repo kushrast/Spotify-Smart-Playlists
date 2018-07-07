@@ -89,7 +89,8 @@ router.get('/authorization', function(req, res, next) {
         };
 
         request.get(options, function(error, response, body) {
-          req.session.userid = body.id;
+          var id = body.id
+          req.session.userid = id;
           // if (!error && response.statusCode == 200) {
           //   req.session.userid = body.id;
           // }
