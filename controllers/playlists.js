@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
     var playlists = [];
     db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
       console.log(docs[0]["data"]);
-      async.each(docs[0]["data"], function(item, callback) {
+      docs[0]["data"].forEach(function(item) {
         var options = {
           url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
           headers: { 'Authorization': 'Bearer ' + req.session.access_token }
@@ -31,18 +31,15 @@ router.get('/', function(req, res, next) {
         request.get(options, function(error, response, playlist) {
           playlists.push(playlist);
         });
-        callback();
-      }, function(err) {
-        if (err) return console.log('ERROR', err);
-
-        console.log(playlists);
-
-        data = {
-          "playlists": playlists
-        }
-        res.render("playlist", data);
       });
     });
+
+    console.log(playlists);
+
+    data = {
+      "playlists": playlists
+    }
+    res.render("playlist", data);
   }
 });
 
