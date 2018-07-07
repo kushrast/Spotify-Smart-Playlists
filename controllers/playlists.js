@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
   else {
     var playlists = [];
     db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
-      console.log(docs["data"]);
+      console.log(docs);
       async.each(docs["data"], function(item, callback) {
         var options = {
           url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
