@@ -89,14 +89,10 @@ router.get('/authorization', function(req, res, next) {
         };
 
         request.get(options, function(error, response, body) {
-          console.log(response.statusCode);
-          console.log(body.id);
-          console.log(error);
           req.session.userid = body.id;
-          console.log(req.session.userid);
-          if (!error && response.statusCode == 200) {
-            req.session.userid = body.id;
-          }
+          // if (!error && response.statusCode == 200) {
+          //   req.session.userid = body.id;
+          // }
         });
 
         var access_token = body.access_token,
