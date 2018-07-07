@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
       }
     },
     function(err, results){
-        db.get().collection("test").find().toArray(function(err, docs) {
+        db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
           console.log(docs);
         });
       data = {
