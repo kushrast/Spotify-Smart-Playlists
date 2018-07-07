@@ -35,6 +35,8 @@ router.get('/', function(req, res, next) {
       }, function(err) {
         if (err) return console.log('ERROR', err);
 
+        console.log(playlists);
+
         data = {
           "playlists": playlists
         }
