@@ -89,10 +89,37 @@ router.post("/:uri/remove", function(req, res, next) {
 
     console.log(options);
 
-    // use the access token to access the Spotify Web API
-    // request.delete(options, function(error, response, playlist) {
-    //   console.log(error);
-    // });
+    use the access token to access the Spotify Web API
+    request.delete(options, function(error, response, playlist) {
+      console.log(error);
+    });
+  }
+});
+
+router.post("/:uri/add", function(req, res, next) {
+  if (req.session.access_token) {
+    console.log(req.params);
+    var body = JSON.parse(Object.keys(req.body)[0]);
+    console.log(body.song_id);
+    var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
+    var options = {
+      url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
+      headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+      body: {
+        "tracks": [{
+          "uri": [body.song_id],
+          "positions": body.position
+        }]
+      },
+      json: true
+    };
+
+    console.log(options);
+
+    use the access token to access the Spotify Web API
+    request.post(options, function(error, response, playlist) {
+      console.log(error);
+    });
   }
 });
 

@@ -69,14 +69,14 @@ $(".song-list").each(function() {
 					})
 				});
 
-				// $.ajax({
-				// 	url: "/playlists/" + $(curr).attr('id') + "/add",
-				// 	type: "post",
-				// 	data: JSON.stringify({
-				// 		"song_id": item.attr('id'),
-				// 		"position": curr_p
-				// 	})
-				// });
+				$.ajax({
+					url: "/playlists/" + $(curr).attr('id') + "/add",
+					type: "post",
+					data: JSON.stringify({
+						"song_id": item.attr('id'),
+						"position": curr_p
+					})
+				});
 			}
 
 			// $.ajax({
