@@ -54,7 +54,7 @@ $(".song-list").each(function() {
 					url: "/playlists/" + $(curr).attr('id') + "/reorder",
 					type: "post",
 					data: JSON.stringify({
-						"song_id": item.attr('id'),
+						"song_id": item.id,
 						"old_position": old_p,
 						"new_position": curr_p
 					})
@@ -64,7 +64,7 @@ $(".song-list").each(function() {
 					url: "/playlists/" + $(old).attr('id') + "/remove",
 					type: "post",
 					data: JSON.stringify({
-						"song_id": item.attr('id'),
+						"song_id": item.id,
 						"position": old_p,
 					})
 				});
