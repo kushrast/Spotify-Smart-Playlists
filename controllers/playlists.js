@@ -41,26 +41,7 @@ router.get('/', function(req, res, next) {
         }
         res.render("playlist", data);
       });
-
-// Promise.all(requests).then(() => console.log('done'));
-//       docs[0]["data"].forEach(function(item) {
-//         var options = {
-//           url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
-//           headers: { 'Authorization': 'Bearer ' + req.session.access_token }
-//         };
-
-//         request.get(options, function(error, response, playlist) {
-//           playlists.push(playlist);
-//         });
-//       });
-//     });
-
-//     console.log(playlists);
-
-//     data = {
-//       "playlists": playlists
-//     }
-//     res.render("playlist", data);
+    });
   }
 });
 
