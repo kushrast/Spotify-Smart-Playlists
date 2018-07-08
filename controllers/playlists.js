@@ -21,12 +21,11 @@ router.get('/', function(req, res, next) {
     db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
       console.log(docs[0]["data"]);
       docs[0]["data"].forEach(function(item) {
+        console.log(item);
         var options = {
           url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
           headers: { 'Authorization': 'Bearer ' + req.session.access_token }
         };
-
-        console.log(options);
 
         request.get(options, function(error, response, playlist) {
           playlists.push(playlist);
