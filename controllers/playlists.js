@@ -27,9 +27,8 @@ router.get('/', function(req, res, next) {
             headers: { 'Authorization': 'Bearer ' + req.session.access_token }
           };
 
-          console.log(options);
-
           request.get(options, function(error, response, playlist) {
+            console.log(playlist);
             resolve(playlist);
           });
         });
