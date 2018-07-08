@@ -89,7 +89,6 @@ router.post("/:uri/remove", function(req, res, next) {
 
     console.log(options);
 
-    use the access token to access the Spotify Web API
     request.delete(options, function(error, response, playlist) {
       console.log(error);
     });
