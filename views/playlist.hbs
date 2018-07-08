@@ -34,11 +34,12 @@
 		</div>
 	{{/playlists}}
 	<div class="utils">
-<!-- 		<button type="button" class="btn btn-primary" id="add-playlist">Add Playlist</button> -->
-		<div class="btn-toolbar" role="toolbar">
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-danger">x</button>
+		<button type="button" class="btn btn-primary" id="add-playlist">Add Playlist</button>
+		<div class="btn-toolbar" role="toolbar" id="add-playlist-form" style="display: none">
+			<div class="btn-group mr-2" role="group">
+				<button type="button" class="btn btn-danger" id="remove-add-playlist">x</button>
 			</div>
+			Add Playlist: 
 			<div class="input-group">
 			  <select class="custom-select" id="inputGroupSelect04">
 			    <option selected>Choose...</option>
@@ -57,8 +58,15 @@
 
 <script>
 $("#add-playlist").click(function() {
+	$(this).hide();
+	$("#add-playlist-form").show();
+});
 
-})
+$("#remove-add-playlist").click(function() {
+	$("#add-playlist-form").hide();
+	$("#add-playlist").show();
+});
+
 $(".song-list").each(function() {
 	Sortable.create(this,
 	{
