@@ -100,11 +100,12 @@ router.post("/:uri/add", function(req, res, next) {
     var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
     var options = {
       url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
-      headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+      headers: { 'Authorization': 'Bearer ' + req.session.access_token ,
+                  'Content-Type': "application/json"},
       body: {
         "tracks": [{
           "uris": [body.song_id],
-          "positions": body.position
+          "position": body.position
         }]
       },
       json: true
