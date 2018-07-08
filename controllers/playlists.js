@@ -20,25 +20,47 @@ router.get('/', function(req, res, next) {
     var playlists = [];
     db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
       console.log(docs[0]["data"]);
-      docs[0]["data"].forEach(function(item) {
-        console.log(item);
-        var options = {
-          url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
-          headers: { 'Authorization': 'Bearer ' + req.session.access_token }
-        };
+      let requests = docs[0]["data"].map((item) => {
+        return new Promise((resolve) => {
+          var options = {
+            url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
+            headers: { 'Authorization': 'Bearer ' + req.session.access_token }
+          };
 
-        request.get(options, function(error, response, playlist) {
-          playlists.push(playlist);
+          request.get(options, function(error, response, playlist) {
+            resolve(playlist);
+          });
         });
       });
-    });
 
-    console.log(playlists);
+      Promise.all(requests).then(function(playlists) {
+        console.log(playlists);
 
-    data = {
-      "playlists": playlists
-    }
-    res.render("playlist", data);
+        data = {
+          "playlists": playlists
+        }
+        res.render("playlist", data);
+      });
+
+// Promise.all(requests).then(() => console.log('done'));
+//       docs[0]["data"].forEach(function(item) {
+//         var options = {
+//           url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
+//           headers: { 'Authorization': 'Bearer ' + req.session.access_token }
+//         };
+
+//         request.get(options, function(error, response, playlist) {
+//           playlists.push(playlist);
+//         });
+//       });
+//     });
+
+//     console.log(playlists);
+
+//     data = {
+//       "playlists": playlists
+//     }
+//     res.render("playlist", data);
   }
 });
 
