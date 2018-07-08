@@ -48,23 +48,24 @@ router.post("/:uri/reorder", function(req, res, next) {
 
   if (req.session.access_token) {
     var body = JSON.parse(Object.keys(req.body)[0]);
-    console.log(req.params);
-    // var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
-    // var options = {
-    //   url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
-    //   headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-    //   body: {
-    //     'uris': body.uris
-    //   },
-    //   json: true
-    // };
+    console.log(body["song_id"]);
+    var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
+    var options = {
+      url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
+      headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+      body: {
+        'range_start': body.old_position,
+        'insert_before': body.new_position
+      },
+      json: true
+    };
 
-    // console.log(options);
+    console.log(options);
 
-    // // use the access token to access the Spotify Web API
-    // request.put(options, function(error, response, playlist) {
-    //   console.log(error);
-    // });
+    // use the access token to access the Spotify Web API
+    request.put(options, function(error, response, playlist) {
+      console.log(error);
+    });
   }
 });
 
