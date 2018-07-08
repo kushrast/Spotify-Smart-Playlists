@@ -19,7 +19,6 @@ router.get('/', function(req, res, next) {
   else {
     var playlists = [];
     db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
-      console.log(docs[0]["data"]);
       let requests = docs[0]["data"].map((item) => {
         return new Promise((resolve) => {
           var options = {
@@ -44,8 +43,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post("/:uri/reorder", function(req, res, next) {
-  console.log(req.session);
-
   if (req.session.access_token) {
     var body = JSON.parse(Object.keys(req.body)[0]);
     console.log(body["song_id"]);
@@ -60,11 +57,9 @@ router.post("/:uri/reorder", function(req, res, next) {
       json: true
     };
 
-    console.log(options);
-
     // use the access token to access the Spotify Web API
     request.put(options, function(error, response, playlist) {
-      console.log(error);
+      console.log(options.url);
     });
   }
 });
