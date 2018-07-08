@@ -47,7 +47,7 @@ $(".song-list").each(function() {
 			var curr_p = evt.newIndex;
 
 			var item = $(curr).eq(curr_p);
-			console.log(item);
+			console.log(item.attr('id'));
 
 			if (old == curr) {
 				$.ajax({
@@ -69,14 +69,14 @@ $(".song-list").each(function() {
 					})
 				});
 
-				$.ajax({
-					url: "/playlists/" + $(curr).attr('id') + "/add",
-					type: "post",
-					data: JSON.stringify({
-						"song_id": item.attr('id'),
-						"position": curr_p
-					})
-				});
+				// $.ajax({
+				// 	url: "/playlists/" + $(curr).attr('id') + "/add",
+				// 	type: "post",
+				// 	data: JSON.stringify({
+				// 		"song_id": item.attr('id'),
+				// 		"position": curr_p
+				// 	})
+				// });
 			}
 
 			// $.ajax({
