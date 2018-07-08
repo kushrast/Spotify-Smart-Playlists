@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
           };
 
           request.get(options, function(error, response, playlist) {
-            resolve(playlist);
+            resolve(JSON.parse(playlist));
           });
         });
       });
