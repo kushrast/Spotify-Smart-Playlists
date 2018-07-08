@@ -115,7 +115,6 @@ router.post("/:uri/add", function(req, res, next) {
 
     console.log(options);
 
-    use the access token to access the Spotify Web API
     request.post(options, function(error, response, playlist) {
       console.log(error);
     });
