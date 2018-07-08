@@ -27,6 +27,8 @@ router.get('/', function(req, res, next) {
             headers: { 'Authorization': 'Bearer ' + req.session.access_token }
           };
 
+          console.log(options);
+
           request.get(options, function(error, response, playlist) {
             resolve(playlist);
           });
@@ -34,8 +36,6 @@ router.get('/', function(req, res, next) {
       });
 
       Promise.all(requests).then(function(playlists) {
-        console.log(playlists);
-
         data = {
           "playlists": playlists
         }
