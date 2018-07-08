@@ -48,7 +48,7 @@ router.post("/:uri/reorder", function(req, res, next) {
 
   if (req.session.access_token) {
     var body = JSON.parse(Object.keys(req.body)[0]);
-    console.log(body);
+    console.log(req.params);
     // var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
     // var options = {
     //   url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
