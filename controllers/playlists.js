@@ -114,7 +114,7 @@ router.post("/:uri/add", function(req, res, next) {
     console.log(tracks);
 
     request.post(options, function(error, response, playlist) {
-      console.log(error);
+      console.log(playlist);
     });
   }
 });
