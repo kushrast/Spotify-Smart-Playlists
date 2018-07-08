@@ -107,7 +107,7 @@ router.post("/:uri/add", function(req, res, next) {
       headers: { 'Authorization': 'Bearer ' + req.session.access_token },
       body: {
         "tracks": [{
-          "uri": [body.song_id],
+          "uris": [body.song_id],
           "positions": body.position
         }]
       },
