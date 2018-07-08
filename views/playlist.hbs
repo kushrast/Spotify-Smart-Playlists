@@ -41,31 +41,62 @@ $(".song-list").each(function() {
 	{
 		group: "songs",
 		onSort: function(evt) {
-			console.log(evt.to);
-			to_uris = [];
-			$(evt.to).find("li").each(function(){
-				to_uris.push($(this).attr('id'));
-			});
+			var old = evt.from;
+			var curr = evt.to;
+			var old_p = evt.oldIndex;
+			var curr_p = evt.newIndex;
 
-			$.ajax({
-				url: "/playlists/" + $(evt.to).attr('id') + "/update",
-				type: "post",
-				data: JSON.stringify({
-					"uris": to_uris
-				})
-			});
-			from_uris = [];
-			$(evt.from).find("li").each(function(){
-				from_uris.push($(this).attr('id'));
-			});
+			var item = $(curr).eq(curr_p);
 
-			$.ajax({
-				url: "/playlists/" + $(evt.from).attr('id') + "/update",
-				type: "post",
-				data: JSON.stringify({
-					"uris": from_uris
-				})
-			});
+			if (old == curr) {
+				$.ajax({
+					url: "/playlists/" + $(curr).attr('id') + "/reorder",
+					type: "post",
+					data: JSON.stringify({
+						"song_id": item.attr('id'),
+						"old_position": old_p,
+						"new_position": curr_p
+					})
+				});
+			} else {
+				$.ajax({
+					url: "/playlists/" + $(old).attr('id') + "/remove",
+					type: "post",
+					data: JSON.stringify({
+						"song_id": item.attr('id'),
+						"position": old_p,
+					})
+				});
+
+				$.ajax({
+					url: "/playlists/" + $(curr).attr('id') + "/add",
+					type: "post",
+					data: JSON.stringify({
+						"song_id": item.attr('id'),
+						"position": curr_p
+					})
+				});
+			}
+
+			// $.ajax({
+			// 	url: "/playlists/" + $(evt.to).attr('id') + "/update",
+			// 	type: "post",
+			// 	data: JSON.stringify({
+			// 		"uris": to_uris
+			// 	})
+			// });
+			// from_uris = [];
+			// $(evt.from).find("li").each(function(){
+			// 	from_uris.push($(this).attr('id'));
+			// });
+
+			// $.ajax({
+			// 	url: "/playlists/" + $(evt.from).attr('id') + "/update",
+			// 	type: "post",
+			// 	data: JSON.stringify({
+			// 		"uris": from_uris
+			// 	})
+			// });
 		}
 	})
 });
