@@ -28,13 +28,13 @@ router.get('/', function(req, res, next) {
           };
 
           request.get(options, function(error, response, playlist) {
-            console.log(playlist);
             resolve(playlist);
           });
         });
       });
 
       Promise.all(requests).then(function(playlists) {
+        console.log(playlists);
         data = {
           "playlists": playlists
         }
