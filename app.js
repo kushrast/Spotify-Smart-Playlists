@@ -23,7 +23,7 @@ app.use(logger('dev')); //Using the morgan logger for HTTP requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: 'yay area', cookie: { maxAge: 60000}}));
+app.use(session({ secret: 'yay area', cookie: { maxAge: 600000}}));
 
 
 //ROUTING

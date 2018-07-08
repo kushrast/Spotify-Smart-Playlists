@@ -47,7 +47,7 @@ $(".song-list").each(function() {
 			var curr_p = evt.newIndex;
 
 			var item = $(curr)[0].getElementsByTagName("li")[curr_p]
-			console.log(item.attr('id'));
+			console.log(item.id);
 
 			if (old == curr) {
 				$.ajax({

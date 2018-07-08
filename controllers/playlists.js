@@ -70,9 +70,8 @@ router.post("/:uri/reorder", function(req, res, next) {
 });
 
 router.post("/:uri/remove", function(req, res, next) {
-  console.log(req.session);
-
   if (req.session.access_token) {
+    console.log(req.params);
     var body = JSON.parse(Object.keys(req.body)[0]);
     console.log(body.song_id);
     var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
