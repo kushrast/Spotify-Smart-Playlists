@@ -92,6 +92,8 @@ router.post("/:uri/remove", function(req, res, next) {
     request.delete(options, function(error, response, playlist) {
       console.log(error);
     });
+  } else {
+    console.log("can't do that sir");
   }
 });
 
