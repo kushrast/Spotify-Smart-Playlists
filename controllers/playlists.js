@@ -4,6 +4,7 @@ var querystring = require('querystring');
 var async = require('async'); //For faster data recovery from Spotify
 
 var config = require('./../config');
+var db = require('./../db');
 
 var router = express.Router(); //The router matches HTTP requests to frontend views
 
@@ -16,36 +17,30 @@ router.get('/', function(req, res, next) {
   } 
 
   else {
-    async.parallel({
-      playlist1: function(callback) {
-        var options = {
-          url: 'https://api.spotify.com/v1/users/124566647/playlists/5nXKbLNDid4yzRChPtJN3W',
-          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-          json: true
-        };
+    var playlists = [];
+    db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
+      console.log(docs[0]["data"]);
+      let requests = docs[0]["data"].map((item) => {
+        return new Promise((resolve) => {
+          var options = {
+            url: 'https://api.spotify.com/v1/users/' + req.session.userid + '/playlists/' + item,
+            headers: { 'Authorization': 'Bearer ' + req.session.access_token }
+          };
 
-        request.get(options, function(error, response, playlist) {
-          callback(null, playlist);
+          request.get(options, function(error, response, playlist) {
+            resolve(JSON.parse(playlist));
+          });
         });
-      },
-      playlist2: function(callback) {
-        var options = {
-          url: 'https://api.spotify.com/v1/users/124566647/playlists/45OFl36RatFmWQbLKvJE4B',
-          headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-          json: true
-        };
+      });
 
-        request.get(options, function(error, response, playlist) {
-          callback(null, playlist);
-        });
-      }
-    },
-    function(err, results){
-      data = {
-        "playlists": [results.playlist1, results.playlist2]
-      }
-      res.render("playlist", data);
-    })
+      Promise.all(requests).then(function(playlists) {
+        console.log(playlists);
+        data = {
+          "playlists": playlists
+        }
+        res.render("playlist", data);
+      });
+    });
   }
 });
 

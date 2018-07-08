@@ -24,7 +24,7 @@ var stateKey = 'spotify_auth_state';
 
 router.get('/', function(req, res, next) {
   if (req.session.access_token) {
-    res.redirect('/authenticated');
+    res.redirect('/playlists');
   } else {
     res.redirect('/login'); //incorporate session data soon
   }
@@ -82,12 +82,27 @@ router.get('/authorization', function(req, res, next) {
       console.log(response);
       if (!error && response.statusCode === 200) {
 
-        var access_token = body.access_token,
+        var options = {
+          url: 'https://api.spotify.com/v1/me',
+          headers: { 'Authorization': 'Bearer ' + body.access_token },
+          json: true
+        };
+
+        request.get(options, function(error, response, user_body) {
+          var id = user_body.id
+          // if (!error && response.statusCode == 200) {
+          //   req.session.userid = body.id;
+                  var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
         req.session.access_token = access_token;
         req.session.refresh_token = refresh_token;
+        req.session.userid = id;
+
+        console.log(req.session);
         res.redirect('/playlists');
+          // }
+        });
       } else {
         res.redirect('/invalid');
       }
