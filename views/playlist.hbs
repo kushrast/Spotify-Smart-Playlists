@@ -62,7 +62,7 @@ var fetch_playlists = false;
 $("#add-playlist").click(function() {
 	$(this).hide();
 	if(!fetch_playlists) {
-		$.get("/playlist/fetch_all", function(data) {
+		$.get("/playlists/fetch_all", function(data) {
 			console.log(data);
 		});
 	}
