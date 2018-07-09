@@ -46,7 +46,7 @@ router.post('/:id/add', function(req, res, next) {
   var body = JSON.parse(Object.keys(req.body)[0]);
   console.log(body);
 
-  db.collection("spotify_sessions").update({
+  db.get().collection("spotify_sessions").update({
     _id: req.params.id
   }, {
     $addToSet: {
