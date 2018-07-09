@@ -10,25 +10,30 @@ var cookieParser = require('cookie-parser'); //loads cookie parser library
 //Spotify Configurations [secret]
 var config = require('./config');
 var routes = require("./controllers/routes");
+var user = require("./controllers/user");
 var playlists = require("./controllers/playlists");
+var multi_playlist = require("./controllers/multi_playlists");
 var session = require('express-session');
 var db = require('./db');
 
 
 //EXPRESS MIDDLEWARE
 var app = express();
+app.use(express.static('public')) //allows us to use stylesheets in public
 app.set("views", path.join(__dirname, "views")) //Lets system know that views are in the /views folder
 app.set("view engine", "hbs"); //Declares handlebars as the templating engine
 app.use(logger('dev')); //Using the morgan logger for HTTP requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: 'yay area', cookie: { maxAge: 60000}}));
+app.use(session({ secret: 'yay area', cookie: { maxAge: 600000}}));
 
 
 //ROUTING
 app.use('/', routes);
+app.use('/user/', user);
 app.use('/playlists/', playlists);
+app.use('/multi/', multi_playlist);
 
 
 // catch 404 and forward to error handler
@@ -43,6 +48,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  console.log(err);
 
   // render the error page
   res.status(err.status || 500);
