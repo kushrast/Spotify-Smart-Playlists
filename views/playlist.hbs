@@ -101,7 +101,10 @@ $("#add-playlist-confirm").click(function() {
 			type: "post",
 			data: JSON.stringify({
 				"uri": val
-			})
+			}),
+	        success: function(data, status) {
+	        	window.location.reload();
+	        }
 		});
 	}
 	$("#add-playlist-form").hide();
@@ -179,10 +182,7 @@ function playSongs(event) {
         type: 'post',
         data: JSON.stringify({
         	'uris': track_uris
-        }),
-        success: function(data, status) {
-        	window.location.reload();
-        }
+        })
     });
 }
 
