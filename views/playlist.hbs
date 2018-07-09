@@ -92,12 +92,12 @@ $("#remove-add-playlist").click(function() {
 
 $("#add-playlist-confirm").click(function() {
 	if(fetch_playlists) {
+		var val = $("#add-playlist-select").val();
 		$.ajax({
 			url: "/multi/{{_id}}/add",
 			type: "post",
 			data: JSON.stringify({
-				"song_id": item.id,
-				"position": old_p,
+				"uri": val,
 			})
 		});
 	}
