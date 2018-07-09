@@ -83,4 +83,24 @@ router.post("/:uri/add", function(req, res, next) {
   res.send();
 });
 
+router.post("/create", function(req, res, next) {
+  if (req.session.access_token) {
+    var body = JSON.parse(Object.keys(req.body)[0]);
+
+    var options = {
+      url: 'https://api.spotify.com/v1/users/'+req.session.userid+'/playlists/',
+      headers: { 'Authorization': 'Bearer ' + req.session.access_token ,
+                  'Content-Type': "application/json"},
+      body: {
+        "name": body.name
+      },
+      json: true
+    };
+
+    request.post(options, function(error, response, playlist) {
+      res.send(playlist);
+    });
+  }
+})
+
 module.exports = router;

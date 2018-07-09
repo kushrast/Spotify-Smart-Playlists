@@ -82,4 +82,15 @@ router.post('/:id/remove', function(req, res, next) {
   res.send();
 });
 
+router.post('/:id/create', function(req, res, next) {
+  console.log(req.params);
+  var body = JSON.parse(Object.keys(req.body)[0]);
+  console.log(body);
+  var uri = body.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
+
+  var options = {
+    
+  }
+});
+
 module.exports = router;
