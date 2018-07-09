@@ -59,6 +59,7 @@ router.post('/:id/add', function(req, res, next) {
     console.log(err);
     console.log(status);
   });
+  res.send()
 });
 
 router.post('/:id/remove', function(req, res, next) {
@@ -77,7 +78,8 @@ router.post('/:id/remove', function(req, res, next) {
   function(err, count, status) {
     console.log(err);
     console.log(status);
-  })
+  });
+  res.send();
 });
 
 module.exports = router;
