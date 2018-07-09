@@ -49,7 +49,7 @@
 			    <option value="3">Three</option>
 			  </select>
 			  <div class="input-group-append">
-			    <button class="btn btn-outline-primary" type="button">Add</button>
+			    <button class="btn btn-outline-primary" type="button" id="add-playlist-confirm">Add</button>
 			  </div>
 			</div>
 		</div>
@@ -89,6 +89,21 @@ $("#remove-add-playlist").click(function() {
 	$("#add-playlist-form").hide();
 	$("#add-playlist").show();
 });
+
+$("#add-playlist-confirm").click(function() {
+	if(fetch_playlists) {
+		$.ajax({
+			url: "/multi/{{_id}}/add",
+			type: "post",
+			data: JSON.stringify({
+				"song_id": item.id,
+				"position": old_p,
+			})
+		});
+	}
+	$("#add-playlist-form").hide();
+	$("#add-playlist").show();
+})
 
 $(".song-list").each(function() {
 	Sortable.create(this,

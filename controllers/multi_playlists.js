@@ -41,4 +41,10 @@ router.get('/', function(req, res, next) {
   }
 });
 
+router.post('/:id/add', function(req, res, next) {
+  console.log(req.params);
+  var body = JSON.parse(Object.keys(req.body)[0]);
+  console.log(body);
+})
+
 module.exports = router;
