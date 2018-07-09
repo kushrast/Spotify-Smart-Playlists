@@ -71,7 +71,7 @@ router.post('/:id/remove', function(req, res, next) {
     _id: new ObjectID(req.params.id)
   }, {
     $pull: {
-      "data": [uri[4]]
+      "data": uri[4]
     }
   },
   function(err, count, status) {
