@@ -94,11 +94,12 @@ $("#remove-add-playlist").click(function() {
 $("#add-playlist-confirm").click(function() {
 	if(fetch_playlists) {
 		var val = $("#add-playlist-select").attr("uri");
+		console.log(val);
 		$.ajax({
 			url: "/multi/{{_id}}/add",
 			type: "post",
 			data: JSON.stringify({
-				"uri": val,
+				"uri": val
 			})
 		});
 	}
