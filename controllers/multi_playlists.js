@@ -5,6 +5,7 @@ var async = require('async'); //For faster data recovery from Spotify
 
 var config = require('./../config');
 var db = require('./../db');
+ObjectID = require('mongodb').ObjectID;
 
 var router = express.Router(); //The router matches HTTP requests to frontend views
 
@@ -48,7 +49,7 @@ router.post('/:id/add', function(req, res, next) {
   var uri = body.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
 
   db.get().collection("spotify_sessions").update({
-    _id: req.params.id
+    _id: new ObjectID(req.params.id)
   }, {
     $addToSet: {
       "data": uri[4]
@@ -67,7 +68,7 @@ router.post('/:id/remove', function(req, res, next) {
   var uri = body.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
 
   db.get().collection("spotify_sessions").update({
-    _id: req.params.id
+    _id: new ObjectID(req.params.id)
   }, {
     $pull: {
       "data": [uri[4]]
