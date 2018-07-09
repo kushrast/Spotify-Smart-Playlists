@@ -128,26 +128,6 @@ $(".song-list").each(function() {
 					})
 				});
 			}
-
-			// $.ajax({
-			// 	url: "/playlists/" + $(evt.to).attr('id') + "/update",
-			// 	type: "post",
-			// 	data: JSON.stringify({
-			// 		"uris": to_uris
-			// 	})
-			// });
-			// from_uris = [];
-			// $(evt.from).find("li").each(function(){
-			// 	from_uris.push($(this).attr('id'));
-			// });
-
-			// $.ajax({
-			// 	url: "/playlists/" + $(evt.from).attr('id') + "/update",
-			// 	type: "post",
-			// 	data: JSON.stringify({
-			// 		"uris": from_uris
-			// 	})
-			// });
 		}
 	})
 });
