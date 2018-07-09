@@ -65,6 +65,14 @@ $("#add-playlist").click(function() {
 		$.get("/playlists/fetch_all", function(data) {
 			console.log(data);
 		});
+
+		var playlist_select = $("#add-playlist-select");
+		playlist_select.empty();
+		playlist_select = playlist_select[0];
+		data.forEach(function(playlist) {
+			playlist_select.options.add(playlist.name);
+		});
+		fetch_playlists = true;
 	}
 	$("#add-playlist-form").show();
 });
