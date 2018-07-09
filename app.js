@@ -19,6 +19,7 @@ var db = require('./db');
 
 //EXPRESS MIDDLEWARE
 var app = express();
+app.use(express.static('public')) //allows us to use stylesheets in public
 app.set("views", path.join(__dirname, "views")) //Lets system know that views are in the /views folder
 app.set("view engine", "hbs"); //Declares handlebars as the templating engine
 app.use(logger('dev')); //Using the morgan logger for HTTP requests
