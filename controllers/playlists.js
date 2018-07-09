@@ -136,4 +136,22 @@ router.post("/play", function(req, res, next) {
   }
 });
 
+router.get("/fetch_all", function(req, res, next) {
+  console.log(req.session);
+  if (req.session.access_token) {
+    var body = JSON.parse(Object.keys(req.body)[0]);
+    var options = {
+        url: 'https://api.spotify.com/v1/me/playlists',
+        headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+        json: true
+      };
+
+      // use the access token to access the Spotify Web API
+      request.get(options, function(error, response, playlist) {
+        console.log(error)
+        res.send(playlist);
+    });
+  }
+});
+
 module.exports = router;

@@ -62,12 +62,9 @@ var fetch_playlists = false;
 $("#add-playlist").click(function() {
 	$(this).hide();
 	if(!fetch_playlists) {
-		$.ajax({
-			url: "/fetch_playlists",
-			type: "get"
+		$.get("/playlist/fetch_all", function(data) {
+			console.log(data);
 		});
-		$("add-playlist-select")[0].options = 
-		$
 	}
 	$("#add-playlist-form").show();
 });
