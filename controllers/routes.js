@@ -24,7 +24,7 @@ var stateKey = 'spotify_auth_state';
 
 router.get('/', function(req, res, next) {
   if (req.session.access_token) {
-    res.redirect('/playlists');
+    res.redirect('/multi');
   } else {
     res.redirect('/login'); //incorporate session data soon
   }
@@ -96,7 +96,7 @@ router.get('/authorization', function(req, res, next) {
         req.session.refresh_token = refresh_token;
         req.session.userid = id;
 
-        res.redirect('/playlists');
+        res.redirect('/multi');
           // }
         });
       } else {

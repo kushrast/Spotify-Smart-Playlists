@@ -59,7 +59,7 @@
 
 <script>
 var fetch_playlists = false;
-var curr_playlists = Set();
+var curr_playlists = new Set();
 
 {{#data}}
 	curr_playlists.add("{{uri}}");
@@ -68,7 +68,7 @@ var curr_playlists = Set();
 $("#add-playlist").click(function() {
 	$(this).hide();
 	if(!fetch_playlists) {
-		$.get("/playlists/fetch_all", function(data) {
+		$.get("/user/fetch_all", function(data) {
 			var playlist_select = $("#add-playlist-select");
 			playlist_select.empty();
 			playlist_select = playlist_select[0];
@@ -145,7 +145,7 @@ function playSongs(event) {
 	    track_uris.push($(this).attr('id'));
 	});
   	$.ajax({
-        url: '/playlists/play',
+        url: '/user/play',
         type: 'post',
         data: JSON.stringify({
         	'uris': track_uris
