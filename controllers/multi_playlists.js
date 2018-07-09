@@ -102,7 +102,7 @@ router.post('/:id/create', function(req, res, next) {
         _id: new ObjectID(req.params.id)
       }, {
         $addToSet: {
-          "data": playlist.uri
+          "data": body[4]
         }
       },
       function(err, count, status) {
