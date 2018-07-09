@@ -146,16 +146,16 @@ $("#remove-create-playlist").click(function() {
 $("#create-playlist-confirm").click(function() {
 	var val = $("#create-playlist-input").val();
 	console.log(val);
-	// $.ajax({
-	// 	url: "/multi/{{_id}}/create",
-	// 	type: "post",
-	// 	data: JSON.stringify({
-	// 		"uri": val
-	// 	}),
- //        success: function(data, status, other) {
- //        	window.location.reload();
- //        }
-	// });
+	$.ajax({
+		url: "/multi/{{_id}}/create",
+		type: "post",
+		data: JSON.stringify({
+			"uri": val
+		}),
+        success: function(data, status, other) {
+        	window.location.reload();
+        }
+	});
 	$("#add-playlist-form").hide();
 	$("#create-playlist-form").hide();
 	$("#create-playlist").show();
