@@ -28,6 +28,7 @@ router.post("/:uri/reorder", function(req, res, next) {
       console.log(options.url);
     });
   }
+  res.send();
 });
 
 router.post("/:uri/remove", function(req, res, next) {
@@ -52,6 +53,7 @@ router.post("/:uri/remove", function(req, res, next) {
   } else {
     console.log("can't do that sir");
   }
+  res.send();
 });
 
 router.post("/:uri/add", function(req, res, next) {
@@ -78,6 +80,7 @@ router.post("/:uri/add", function(req, res, next) {
       console.log(playlist);
     });
   }
+  res.send();
 });
 
 module.exports = router;

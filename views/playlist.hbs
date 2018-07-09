@@ -54,7 +54,19 @@
 			  </div>
 			</div>
 		</div>
-		<button type="button" class="btn btn-success">Create Playlist</button>
+		<button type="button" class="btn btn-success" id="create-playlist">Create Playlist</button>
+		<div class="btn-toolbar" role="toolbar" id="create-playlist-form" style="display: none">
+			<div class="btn-group mr-2" role="group">
+				<button type="button" class="btn btn-danger" id="remove-create-playlist">x</button>
+			</div>
+			Create Playlist: 
+			<form class="input-group">
+			  <input id="create-playlist-input" type="text">
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-primary" type="submit" id="create-playlist-confirm">Create</button>
+			  </div>
+			</form>
+		</div>
 	</div>
 </div>
 
@@ -68,6 +80,8 @@ var curr_playlists = new Set();
 
 $("#add-playlist").click(function() {
 	$(this).hide();
+	$("#create-playlist").hide();
+	$("#create-playlist-form").hide();
 	if(!fetch_playlists) {
 		$.get("/user/fetch_all", function(data) {
 			var playlist_select = $("#add-playlist-select");
@@ -90,6 +104,8 @@ $("#add-playlist").click(function() {
 $("#remove-add-playlist").click(function() {
 	$("#add-playlist-form").hide();
 	$("#add-playlist").show();
+	$("#create-playlist").show();
+	$("#create-playlist-form").hide();
 });
 
 $("#add-playlist-confirm").click(function() {
@@ -106,6 +122,39 @@ $("#add-playlist-confirm").click(function() {
 	        	window.location.reload();
 	        }
 		});
+	}
+	$("#add-playlist-form").hide();
+	$("#add-playlist").show();
+});
+
+$("#create-playlist").click(function() {
+	$(this).hide();
+	$("#add-playlist").hide();
+	$("#add-playlist-form").hide();
+	$("#add-playlist-form").show();
+});
+
+$("#remove-create-playlist").click(function() {
+	$("#add-playlist-form").hide();
+	$("#add-playlist").show();
+	$("#create-playlist").show();
+	$("#create-playlist-form").hide();
+});
+
+$("#create-playlist-confirm").click(function() {
+	if(fetch_playlists) {
+		var val = $("#create-playlist-input").val();
+		console.log(val);
+		// $.ajax({
+		// 	url: "/multi/{{_id}}/create",
+		// 	type: "post",
+		// 	data: JSON.stringify({
+		// 		"uri": val
+		// 	}),
+	 //        success: function(data, status, other) {
+	 //        	window.location.reload();
+	 //        }
+		// });
 	}
 	$("#add-playlist-form").hide();
 	$("#add-playlist").show();
