@@ -75,7 +75,8 @@ $("#add-playlist").click(function() {
 			data.forEach(function(playlist) {
 				if (!curr_playlists.has(playlist.uri)){
 					var c = document.createElement("option");
-					c.text = playlist.name
+					c.text = playlist.name;
+					c.setAttribute("uri", playlist.uri);
 					playlist_select.options.add(c);
 				}
 			});
@@ -92,7 +93,7 @@ $("#remove-add-playlist").click(function() {
 
 $("#add-playlist-confirm").click(function() {
 	if(fetch_playlists) {
-		var val = $("#add-playlist-select").val();
+		var val = $("#add-playlist-select").attr("uri");
 		$.ajax({
 			url: "/multi/{{_id}}/add",
 			type: "post",
