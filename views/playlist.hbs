@@ -59,10 +59,10 @@
 
 <script>
 var fetch_playlists = false;
-var curr_playlists = [];
+var curr_playlists = Set();
 
 {{#data}}
-	curr_playlists.push("{{uri}}");
+	curr_playlists.add("{{uri}}");
 {{/data}}
 
 $("#add-playlist").click(function() {
@@ -73,7 +73,11 @@ $("#add-playlist").click(function() {
 			playlist_select.empty();
 			playlist_select = playlist_select[0];
 			data.forEach(function(playlist) {
-				playlist_select.options.add(playlist.name);
+				if (!curr_playlists.has(playlist.uri)){
+					var c = document.createElement("option");
+					c.text = playlist.name
+					playlist_select.options.add(c);
+				}
 			});
 			fetch_playlists = true;
 		});
