@@ -114,13 +114,16 @@ $("#add-playlist-confirm").click(function() {
 $("#remove-playlist").click(function(){ 
 	var val = $(this).closest(".playlist-body").attr("id");
 	console.log(val);
-	// $.ajax({
-	// 	url: "/multi/{{_id}}/remove",
-	// 	type: "post",
-	// 	data: JSON.stringify({
-	// 		"uri": val
-	// 	})
-	// });
+	$.ajax({
+		url: "/multi/{{_id}}/remove",
+		type: "post",
+		data: JSON.stringify({
+			"uri": val
+		}),
+        success: function(data, status) {
+        	window.location.reload();
+        }
+	});
 });
 
 $(".song-list").each(function() {
