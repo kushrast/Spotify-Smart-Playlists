@@ -150,7 +150,7 @@ $("#create-playlist-confirm").click(function() {
 		url: "/multi/{{_id}}/create",
 		type: "post",
 		data: JSON.stringify({
-			"uri": val
+			"name": val
 		}),
         success: function(data, status, other) {
         	window.location.reload();

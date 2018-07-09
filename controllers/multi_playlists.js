@@ -96,6 +96,7 @@ router.post('/:id/create', function(req, res, next) {
     };
 
     request.post(options, function(error, response, playlist) {
+      console.log(playlist);
       db.get().collection("spotify_sessions").update({
         _id: new ObjectID(req.params.id)
       }, {
@@ -107,8 +108,8 @@ router.post('/:id/create', function(req, res, next) {
         console.log(err);
         console.log(status);
       });
-      res.send();
     });
+    res.send();
 });
 
 module.exports = router;
