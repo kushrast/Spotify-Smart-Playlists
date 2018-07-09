@@ -33,10 +33,9 @@ router.get('/', function(req, res, next) {
       });
 
       Promise.all(requests).then(function(playlists) {
-        data = {
-          "playlists": playlists
-        }
-        res.render("playlist", data);
+        docs[0]["data"] = playlists
+        console.log(docs[0]);
+        res.render("playlist", docs[0]);
       });
     });
   }

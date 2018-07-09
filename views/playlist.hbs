@@ -1,5 +1,5 @@
 <div class="container">
-	{{#playlists}}
+	{{#data}}
 		<div class="playlist-body" id="playlist-bod">
 			<div class="card">
 				<div class="card-body">
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 		</div>
-	{{/playlists}}
+	{{/data}}
 	<div class="utils">
 		<button type="button" class="btn btn-primary" id="add-playlist">Add Playlist</button>
 		<div class="btn-toolbar" role="toolbar" id="add-playlist-form" style="display: none">
@@ -41,7 +41,7 @@
 			</div>
 			Add Playlist: 
 			<div class="input-group">
-			  <select class="custom-select" id="inputGroupSelect04">
+			  <select class="custom-select" id="add-playlist-select">
 			    <option selected>Choose...</option>
 			    <option value="1">One</option>
 			    <option value="2">Two</option>
@@ -57,8 +57,17 @@
 </div>
 
 <script>
+var fetch_playlists = false;
 $("#add-playlist").click(function() {
 	$(this).hide();
+	if(!fetch_playlists) {
+		$.ajax({
+			url: "/fetch_playlists",
+			type: "get"
+		});
+		$("add-playlist-select")[0].options = 
+		$
+	}
 	$("#add-playlist-form").show();
 });
 
