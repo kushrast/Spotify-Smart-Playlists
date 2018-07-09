@@ -60,8 +60,8 @@
 				<button type="button" class="btn btn-danger" id="remove-create-playlist">x</button>
 			</div>
 			Create Playlist: 
-			<form class="input-group">
-			  <input id="create-playlist-input" type="text">
+			<form class="input-group" onsubmit="return false">
+			  <input id="create-playlist-input" type="text" required>
 			  <div class="input-group-append">
 			    <button class="btn btn-outline-primary" type="submit" id="create-playlist-confirm">Create</button>
 			  </div>
