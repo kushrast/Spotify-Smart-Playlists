@@ -102,7 +102,7 @@ $("#add-playlist-confirm").click(function() {
 			data: JSON.stringify({
 				"uri": val
 			}),
-	        success: function(data, status) {
+	        success: function(data, status, other) {
 	        	window.location.reload();
 	        }
 		});
@@ -183,7 +183,7 @@ function removePlaylist(event){
 		data: JSON.stringify({
 			"uri": val
 		}),
-        success: function(data, status) {
+        success: function(data, status, other) {
         	window.location.reload();
         }
 	});
