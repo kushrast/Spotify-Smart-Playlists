@@ -45,12 +45,13 @@ router.post('/:id/add', function(req, res, next) {
   console.log(req.params);
   var body = JSON.parse(Object.keys(req.body)[0]);
   console.log(body);
+  var uri = body.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
 
   db.get().collection("spotify_sessions").update({
     _id: req.params.id
   }, {
     $addToSet: {
-      "data": body.uri
+      "data": uri[4]
     }
   },
   function(err, count, status) {
@@ -63,13 +64,18 @@ router.post('/:id/remove', function(req, res, next) {
   console.log(req.params);
   var body = JSON.parse(Object.keys(req.body)[0]);
   console.log(body);
+  var uri = body.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
 
   db.get().collection("spotify_sessions").update({
     _id: req.params.id
   }, {
     $pull: {
-      "data": [body.uri]
+      "data": [uri[4]]
     }
+  },
+  function(err, count, status) {
+    console.log(err);
+    console.log(status);
   })
 });
 
