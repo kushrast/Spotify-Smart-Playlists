@@ -61,9 +61,9 @@
 var fetch_playlists = false;
 var curr_playlists = [];
 
-// {{#data}}
-// 	curr_playlists.push({{uri}});
-// {{/data)}}
+{{#data}}
+	curr_playlists.push({{uri}});
+{{/data}}
 
 $("#add-playlist").click(function() {
 	$(this).hide();
