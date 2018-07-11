@@ -2,9 +2,12 @@
 	<div class="multi-body">
 		<h1 class="multi-title">Multi-Playlists</h1>
 		{{#data}}
-			<div class="card">
+			<div class="card multi" id="{{_id}}">
 				<div class="card-body">
 					<div class="row">
+						<div class="col-md-2">
+							<button type="button" class="btn btn-outline-danger" id="delete-multi-playlist">Delete</button>
+						</div>
 					  	<div class="col-md-1">
 					  		<a href="/multi/{{_id}}"><i class="fas fa-music song-handle"></i></a>
 					  	</div>
@@ -49,17 +52,31 @@ $("#remove-create-multi").click(function() {
 $("#create-multi-confirm").click(function() {
 	var val = $("#create-playlist-input").val();
 	console.log(val);
-	// $.ajax({
-	// 	url: "/multi/create",
-	// 	type: "post",
-	// 	data: JSON.stringify({
-	// 		"name": val
-	// 	}),
- //        success: function(data, status, other) {
- //        	window.location.reload();
- //        }
-	// });
+	$.ajax({
+		url: "/multi/create",
+		type: "post",
+		data: JSON.stringify({
+			"name": val
+		}),
+        success: function(data, status, other) {
+        	window.location.reload();
+        }
+	});
 	$("#create-multi-form").hide();
 	$("#create-multi").show();
 });
+
+function deletePlaylist(event){ 
+	var val = $(event.target).closest(".multi").attr("id");
+	console.log(val);
+	$.ajax({
+		url: "/multi/{{_id}}/delete",
+		type: "post",
+        success: function(data, status, other) {
+        	window.location.reload();
+        }
+	});
+}
+
+$(document).on('click', '#delete-multi-playlist', deletePlaylist);
 </script>
