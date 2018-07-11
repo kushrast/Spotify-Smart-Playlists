@@ -10,6 +10,24 @@ ObjectID = require('mongodb').ObjectID;
 var router = express.Router(); //The router matches HTTP requests to frontend views
 
 router.get('/', function(req, res, next) {
+  if (!req.session.access_token) {
+    res.redirect('/invalid');
+  } else {
+    db.get().collection("spotify_sessions").find({
+      user_id: req.session.userid
+    }).toArray(function(err, multi_list) {
+      if (err) {
+        res.redirect("/invalid");
+      }
+      data = {
+        "data": multi_list
+      }
+      res.render("multi_home", data);
+    })
+  }
+});
+
+router.get('/single', function(req, res, next) {
 
   console.log(req.session);
 
