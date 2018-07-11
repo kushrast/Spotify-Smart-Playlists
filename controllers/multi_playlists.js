@@ -134,4 +134,34 @@ router.post('/:id/create', function(req, res, next) {
     res.send();
 });
 
+router.post('/:id/delete', function(req, res, next) {
+  if (req.session) {
+    db.get().collection("spotify_sessions").deleteOne({
+      _id: new ObjectID(req.params.id)
+    },
+    function(err, count, status) {
+      console.log(err);
+      console.log(status);
+    });
+  res.send();
+  }
+});
+
+router.post('/create', function(req, res, next) {
+  if (req.session) 
+    var body = JSON.parse(Object.keys(req.body)[0]);
+
+    db.get().collection("spotify_sessions").insertOne({
+      "name": body.name,
+      "user_id": req.session.userid,
+      "created": new Date(),
+      "data": []
+    }, function(err, resp) {
+      if (!err) {
+        console.log(resp.ops);
+      }
+    });
+    res.send();
+});
+
 module.exports = router;

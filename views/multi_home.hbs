@@ -1,20 +1,82 @@
 <div class="container">
-	<h1 class="multi-title">Multi-Playlists</h1>
-	{{#data}}
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-				  	<div class="col-md-1">
-				  		<a href="/multi/{{_id}}"><i class="fas fa-music song-handle"></i></a>
-				  	</div>
-				  	<div class="col-md-3">
-				      <dt class="playlist_uri">Made at</dt><dd>{{created}}</a></dd>
+	<div class="multi-body">
+		<h1 class="multi-title">Multi-Playlists</h1>
+		{{#data}}
+			<div class="card multi" id="{{_id}}">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-2">
+							<button type="button" class="btn btn-outline-danger" id="delete-multi-playlist">Delete</button>
+						</div>
+					  	<div class="col-md-1">
+					  		<a href="/multi/{{_id}}"><i class="fas fa-music song-handle"></i></a>
+					  	</div>
+					  	<div class="col-md-3">
+					      <dt class="playlist_uri">Made at</dt><dd>{{created}}</a></dd>
+					    </div>
+					    <div class="col-md-3">
+					    	<dt class="playlist_uri">Name</dt><dd>{{name}}</a></dd>
+					    </div>
 				    </div>
-				    <div class="col-md-3">
-				    	<dt class="playlist_uri">Name</dt><dd>{{name}}</a></dd>
-				    </div>
-			    </div>
+				</div>
 			</div>
+		{{/data}}
+	</div>
+	<div class="utils">
+		<button type="button" class="btn btn-success" id="create-multi">Create Multi-Playlist</button>
+		<div class="btn-toolbar" role="toolbar" id="create-multi-form" style="display: none">
+			<div class="btn-group mr-2" role="group">
+				<button type="button" class="btn btn-danger" id="remove-create-mult">x</button>
+			</div>
+			Create Playlist: 
+			<form class="input-group" onsubmit="return false">
+			  <input id="create-multi-input" type="text" required>
+			  <div class="input-group-append">
+			    <button class="btn btn-outline-primary" type="submit" id="create-multi-confirm">Create</button>
+			  </div>
+			</form>
 		</div>
-	{{/data}}
+	</div>
 </div>
+<script>
+$("#create-multi").click(function() {
+	$(this).hide();
+	$("#create-multi-form").show();
+});
+
+$("#remove-create-multi").click(function() {
+	$("#create-multi").show();
+	$("#create-multi-form").hide();
+});
+
+$("#create-multi-confirm").click(function() {
+	var val = $("#create-multi-input").val();
+	console.log(val);
+	$.ajax({
+		url: "/multi/create",
+		type: "post",
+		data: JSON.stringify({
+			"name": val
+		}),
+        success: function(data, status, other) {
+        	window.location.reload();
+        }
+	});
+	$("#create-multi-form").hide();
+	$("#create-multi").show();
+});
+
+function deletePlaylist(event){ 
+	var val = $(event.target).closest(".multi").attr("id");
+	console.log(val);
+	$.ajax({
+		url: "/multi/"+val+"/delete",
+		type: "post",
+        success: function(data, status, other) {
+        	window.location.reload();
+        }
+	});
+}
+
+$(document).on('click', '#delete-multi-playlist', deletePlaylist);
+</script>
