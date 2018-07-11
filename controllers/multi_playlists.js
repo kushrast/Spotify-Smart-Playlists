@@ -136,7 +136,7 @@ router.post('/:id/create', function(req, res, next) {
 
 router.post('/:id/delete', function(req, res, next) {
   if (req.session) {
-    db.get().collection("spotify_sessions").delete({
+    db.get().collection("spotify_sessions").deleteOne({
       _id: new ObjectID(req.params.id)
     },
     function(err, count, status) {
@@ -158,7 +158,7 @@ router.post('/create', function(req, res, next) {
       "data": []
     }, function(err, resp) {
       if (!err) {
-        console.log(response.ops);
+        console.log(resp.ops);
       }
     });
     res.send();
