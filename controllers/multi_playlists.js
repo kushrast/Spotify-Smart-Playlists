@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.get('/single', function(req, res, next) {
+router.get('/:multi_id', function(req, res, next) {
 
   console.log(req.session);
 
@@ -37,7 +37,10 @@ router.get('/single', function(req, res, next) {
 
   else {
     var playlists = [];
-    db.get().collection("spotify_sessions").find().toArray(function(err, docs) {
+    db.get().collection("spotify_sessions").find({
+      user_id: req.session.userid,
+      _id: ObjectID(req.params.multi_id)
+    }).toArray(function(err, docs) {
       let requests = docs[0]["data"].map((item) => {
         return new Promise((resolve) => {
           var options = {
