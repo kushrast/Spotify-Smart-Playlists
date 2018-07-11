@@ -70,7 +70,7 @@ function deletePlaylist(event){
 	var val = $(event.target).closest(".multi").attr("id");
 	console.log(val);
 	$.ajax({
-		url: "/multi/{{_id}}/delete",
+		url: "/multi/"+val+"/delete",
 		type: "post",
         success: function(data, status, other) {
         	window.location.reload();
