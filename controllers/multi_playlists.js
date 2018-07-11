@@ -134,4 +134,20 @@ router.post('/:id/create', function(req, res, next) {
     res.send();
 });
 
+router.post('/create', function(req, res, next) {
+    var body = JSON.parse(Object.keys(req.body)[0]);
+
+    db.get().collection("spotify_sessions").insertOne({
+      "name": body.name,
+      "user_id": req.session.userid,
+      "created": new Date(),
+      "data": []
+    }, function(err, resp) {
+      if (!err) {
+        console.log(response.ops);
+      }
+    });
+    res.send();
+});
+
 module.exports = router;
