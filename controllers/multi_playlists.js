@@ -66,18 +66,19 @@ router.get('/:multi_id', function(req, res, next) {
 router.post('/:multi_id/editName', function(req, res, next) {
   var body = JSON.parse(Object.keys(req.body)[0]);
   console.log(body);
+  // console.log(body);
 
-  db.get().collection("spotify_sessions").update({
-    _id: new ObjectID(req.params.id)
-  }, {
-    $update: {
-      "name": body.name
-    }
-  },
-  function(err, count, status) {
-    console.log(err);
-    console.log(status);
-  });
+  // db.get().collection("spotify_sessions").update({
+  //   _id: new ObjectID(req.params.id)
+  // }, {
+  //   $update: {
+  //     "name": body.name
+  //   }
+  // },
+  // function(err, count, status) {
+  //   console.log(err);
+  //   console.log(status);
+  // });
 
   res.send();
 })

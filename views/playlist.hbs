@@ -14,7 +14,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" id="saveMultiName">Save changes</button>
+	        <button type="button" class="btn btn-primary saveMultiName" id="{{_id}}" >Save changes</button>
 	      </div>
 	    </div>
 	  </div>
@@ -246,15 +246,15 @@ $(".song-list").each(function() {
 	})
 });
 
-$("#saveMultiName").click(function() {
-	// $.ajax({
-	// 	url: "/multi/" + $(this).attr('id') + "/editName",
-	// 	type: "post",
-	// 	data: JSON.stringify({
-	// 		"name": $(this).attr('value')
-	// 	})
-	// });
-	console.log($(this).attr('value'));
+$(".saveMultiName").click(function() {
+	$.ajax({
+		url: "/multi/" + $(this).attr('id') + "/editName",
+		type: "post",
+		data: JSON.stringify({
+			"name": $(this).attr('value')
+		})
+	});
+	console.log($(this).attr('id'));
 })
 
 function playSongs(event) {
