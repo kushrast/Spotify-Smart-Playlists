@@ -83,4 +83,27 @@ router.post("/:uri/add", function(req, res, next) {
   res.send();
 });
 
+router.post("/:uri/editName", function(req, res, next) {
+  if (req.session.access_token) {
+    console.log(req.params);
+    // var body = JSON.parse(Object.keys(req.body)[0]);
+
+    // var uri = req.params.uri.split(":"); //Done like this to parse out the user and playlist out of the uri
+    // var options = {
+    //   url: 'https://api.spotify.com/v1/users/'+uri[2]+'/playlists/'+uri[4]+'/tracks',
+    //   headers: { 'Authorization': 'Bearer ' + req.session.access_token ,
+    //               'Content-Type': "application/json"},
+    //   body: {
+    //     "name": body.name
+    //   },
+    //   json: true
+    // };
+
+    // request.put(options, function(error, response, playlist) {
+    //   console.log(playlist);
+    // });
+  }
+  res.send();
+});
+
 module.exports = router;

@@ -34,11 +34,11 @@
 					        </button>
 					      </div>
 					      <div class="modal-body">
-					        <input type="text" value={{name}} class="form-control">
+					        <input type="text" value={{name}} class="form-control" id="{{_id}}_input">
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+					        <button type="button" class="btn btn-primary saveChanges" data-dismiss="modal" id="{{_id}}">Save changes</button>
 					      </div>
 					    </div>
 					  </div>
@@ -252,10 +252,13 @@ $(".saveMultiName").click(function() {
 		type: "post",
 		data: JSON.stringify({
 			"name": $("#"+$(this).attr('id')+"_input").attr('value')
-		})
+		}),
+		success: function(data, status, other) {
+        	window.location.reload();
+        }
 	});
 	console.log($("#"+$(this).attr('id')+"_input").attr('value'));
-})
+});
 
 function playSongs(event) {
 	item = event.target
@@ -292,9 +295,24 @@ function removePlaylist(event){
 	});
 }
 
+function updateName(event) {
+	$.ajax({
+		url: "/playlists/" + $(event.target).attr('id') + "/editName",
+		type: "post",
+		data: JSON.stringify({
+			"name": $("#"+$(event.target).attr('id')+"_input").attr('value')
+		}),
+		success: function(data, status, other) {
+        	window.location.reload();
+        }
+	});
+}
+
 $(document).on('click', '#remove-playlist', removePlaylist);
 
 $(document).on('click', '#play-curr', playSongs);
+
+$(document).on('click', '.saveChanges', updateName);
 
 
 </script>
