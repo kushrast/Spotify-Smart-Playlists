@@ -1,3 +1,7 @@
 .song-list {
 	min-height: 50px
 }
+
+.navbar {
+	background: linear-gradient(to bottom right, #1DB954, yellow);
+}
