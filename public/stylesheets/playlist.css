@@ -4,5 +4,8 @@
 
 .navbar {
 	background: linear-gradient(to bottom right, #1DB954, yellow);
+}
+
+.navbar-brand {
 	color: white;
 }
