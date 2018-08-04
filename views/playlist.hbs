@@ -10,7 +10,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <input type="text" value={{name}} class="form-control">
+	        <input type="text" value={{name}} class="form-control" id="{{_id}}_input">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -251,10 +251,10 @@ $(".saveMultiName").click(function() {
 		url: "/multi/" + $(this).attr('id') + "/editName",
 		type: "post",
 		data: JSON.stringify({
-			"name": $(this).attr('value')
+			"name": $($(this).attr('id')+"_input").attr('value')
 		})
 	});
-	console.log($(this).attr('id'));
+	console.log($(this).attr('value'));
 })
 
 function playSongs(event) {
