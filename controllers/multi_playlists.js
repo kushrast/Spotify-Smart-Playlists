@@ -70,7 +70,7 @@ router.post('/:multi_id/editName', function(req, res, next) {
   db.get().collection("spotify_sessions").update({
     _id: new ObjectID(req.params.id)
   }, {
-    $update: {
+    $set: {
       "name": body.name
     }
   },
