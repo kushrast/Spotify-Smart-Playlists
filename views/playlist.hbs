@@ -251,7 +251,7 @@ $(".saveMultiName").click(function() {
 		url: "/multi/" + $(this).attr('id') + "/editName",
 		type: "post",
 		data: JSON.stringify({
-			"name": $($(this).attr('id')+"_input").attr('value')
+			"name": $("#"+$(this).attr('id')+"_input").attr('value')
 		})
 	});
 	console.log($(this).attr('value'));
