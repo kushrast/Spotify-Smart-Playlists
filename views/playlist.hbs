@@ -269,7 +269,10 @@ function playSongs(event) {
         type: 'post',
         data: JSON.stringify({
         	'uris': track_uris
-        })
+        }),
+        success: function(data, status, other) {
+        	window.location.reload();
+        }
     });
 }
 
